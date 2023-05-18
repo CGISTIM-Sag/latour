@@ -4,7 +4,13 @@ input.onButtonPressed(Button.A, function () {
         X = Sprite.get(LedSpriteProperty.X)
     }
     Tomber(Sprite)
-    Sprite = game.createSprite(0, 0)
+    if (game.score() < 5) {
+        Sprite = game.createSprite(0, 0)
+    } else {
+        music.playMelody("G F E F E G E - ", 250)
+        music.playMelody("G F E F E G E - ", 250)
+        basic.showString("VICTOIRE! A+B POUR REJOUER")
+    }
     Cliqué = 0
 })
 function JouerMauvais () {
@@ -41,13 +47,13 @@ let Cliqué = 0
 let Etage = 0
 let Sprite: game.LedSprite = null
 Sprite = game.createSprite(0, 0)
-let Vitesse = 1000
+let Vitesse = 500
 Etage = 1
 Cliqué = 0
 X = -1
 music.setVolume(50)
 basic.forever(function () {
-    if (Cliqué == 0) {
+    if (Cliqué == 0 && game.score() < 5) {
         Sprite.move(1)
         basic.pause(Vitesse)
         Sprite.ifOnEdgeBounce()
